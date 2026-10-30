@@ -1,5 +1,16 @@
 # Project Report — Customer Support Ticket Data Pipeline
 
+## Submission Details
+
+- **Developer:** Abhay Gour
+- **Assignment:** Day 02 — Object-Oriented Python & Reusable Modules
+- **Date:** 2026-10-30
+- **Repository URL:** https://github.com/abhayg-halcer/Day-02-OOP-Ticket-System_Abhay
+- **Latest commit hash:** `60a64df`
+- **Pull Request:** N/A — no pull request created
+
+---
+
 ## 1. Project Title
 
 **Customer Support Ticket Data Pipeline using Object-Oriented Python and Reusable Modules**
