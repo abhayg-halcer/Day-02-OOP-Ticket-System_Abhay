@@ -53,6 +53,36 @@ It is useful for applying additional validation rules.
 
 In this project, it checks ticket IDs, categories, priorities, statuses, ratings, and resolution times.
 
+### Class attributes vs instance attributes
+
+- Instance attributes live on `self` (each ticket’s id, status, rating).
+- Class / module attributes are shared (allowed priorities, SLA limits).
+- A mutable class attribute (a list or dict on the class) is shared by every instance.
+  Appending in one object is visible on all others. That is why duplicate IDs are tracked
+  in a local set, not on the class.
+
+### Composition vs inheritance
+
+Use inheritance when the relationship is truly “is-a” and you need the same interface.
+Prefer composition when you only need to *use* another piece of behaviour
+(loader + cleaner + analytics). That is what this pipeline does.
+
+### Encapsulation in Python
+
+Keep fields consistent by validating in `__post_init__` and using `frozen=True`.
+Python does not truly hide attributes, but the object refuses invalid or mutated state.
+
+### Avoiding a god object
+
+If a class loads files, validates, analyses, and writes reports, split those jobs.
+A useful check: “Would I need a new class name if I added one more feature?” If yes, split now.
+
+### Testing a component with an external dependency
+
+Do not hit a real production file if you can avoid it.
+Pass a path (`tmp_path` in pytest) or pass already-loaded rows into `clean_tickets`.
+That is how `test_report_exporter.py` and the integration test work.
+
 ## 2. Special Methods
 
 ### `__str__()`
