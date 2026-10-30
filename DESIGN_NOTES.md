@@ -152,3 +152,40 @@ Current test result: **17 passed**.
 - Support additional export formats.
 - Add logging instead of relying only on print statements.
 - Add command-line arguments for input and output paths.
+
+- ## 9. Design comparison
+
+### Design A — one processor class
+A single `TicketProcessor` would load the CSV, validate, clean, analyse, and export.
+That is simpler to start, but every change (new SLA rule, new export) touches the same class.
+Tests become large and coupled. This is a god object.
+
+### Design B — small modules composed by `main()` (chosen)
+- `csv_loader` only reads rows
+- `ticket_validator` only finds field issues
+- `ticket_cleaner` only decides keep / reject / normalise
+- `ticket_analytics` only computes metrics
+- `report_exporter` only writes CSV
+- `SupportTicket` only represents one valid ticket
+- `main()` wires them in order
+
+**Why B:** lower coupling, each module has one job, SLA analysis was added as a new function without changing loading or validation. Composition here means `main` uses these pieces; there is no inheritance, because nothing needed an “is-a” relationship.
+
+## 10. Review of a messy design (what we avoided)
+
+A messy version would look like:
+
+- one class holding the file path, all rows, valid tickets, reports, and SLA limits
+- methods like `run()`, `fix()`, `stats()`, `save()` on the same class
+- class-level `tickets = []` shared by every instance
+- validation mixed with print statements and file writes
+
+Issues: many reasons to change, hard to test without real files, easy to mutate shared class state, invalid tickets can leak into analytics.
+
+We avoided that by keeping validation on the model, cleaning in one function, and analytics as pure functions of a ticket list.
+
+## 11. Class vs instance state in this project
+
+- **Instance state:** each `SupportTicket` has its own `ticket_id`, `priority`, `status`, and so on.
+- **Module-level constants:** `ALLOWED_PRIORITIES`, `SLA_LIMITS` are shared rules, not per-ticket data.
+- **Not used:** a mutable class attribute like `SupportTicket.seen_ids = []`. If two pipelines ran, they would share and corrupt that list. Duplicate tracking is a local `seen_ticket_ids` set inside `clean_tickets()` instead.
