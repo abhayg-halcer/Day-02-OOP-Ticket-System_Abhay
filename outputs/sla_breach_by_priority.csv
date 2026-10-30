@@ -1,0 +1,5 @@
+priority,total_tickets,resolved_tickets,unresolved_tickets,breached_tickets,within_sla_tickets,breach_percentage
+Critical,2,2,0,2,0,100.0
+High,10,10,0,4,6,40.0
+Medium,10,0,10,0,0,0
+Low,10,0,10,0,0,0

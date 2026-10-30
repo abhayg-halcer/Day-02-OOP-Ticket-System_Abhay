@@ -1,0 +1,10 @@
+row_number,ticket_id,field,issue,action
+32,,ticket_id,missing_ticket_id,rejected
+34,TKT033,description,blank_description,rejected
+35,TKT034,customer_rating,invalid_rating,normalized_to_none
+36,TKT035,resolution_time_hours,negative_duration,rejected
+37,TKT036,created_at,invalid_date,rejected
+38,TKT037,status,invalid_status,rejected
+39,TKT038,priority,invalid_priority,rejected
+40,TKT039,category,invalid_or_missing_category,rejected
+41,TKT001,ticket_id,duplicate_ticket_id,rejected

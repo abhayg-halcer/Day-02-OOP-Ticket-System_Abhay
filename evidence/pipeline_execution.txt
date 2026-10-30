@@ -1,0 +1,19 @@
+Starting ticket processing pipeline...
+Raw records loaded: 40
+Valid tickets: 32
+Quality issues found: 9
+
+--- Ticket Summary ---
+Total valid tickets: 32
+Average resolution time: 7.75 hours
+
+--- SLA Breach Analysis ---
+Critical: 2 breached / 2 resolved (100.0%)
+High: 4 breached / 10 resolved (40.0%)
+Medium: 0 breached / 0 resolved (0%)
+Low: 0 breached / 0 resolved (0%)
+
+Reports exported successfully:
+- outputs/data_quality_report.csv
+- outputs/summary_metrics.csv
+- outputs/sla_breach_by_priority.csv

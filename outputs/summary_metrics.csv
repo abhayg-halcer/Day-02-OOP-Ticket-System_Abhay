@@ -1,0 +1,10 @@
+metric,value
+total_tickets,32
+average_resolution_hours,7.75
+status_Open,10
+status_In Progress,10
+status_Resolved,12
+priority_Low,10
+priority_Medium,10
+priority_High,10
+priority_Critical,2
