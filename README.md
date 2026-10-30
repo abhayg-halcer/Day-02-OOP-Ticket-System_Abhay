@@ -101,6 +101,22 @@ The pipeline generates three CSV reports inside the `outputs/` directory:
 
 Resolved or closed tickets exceeding their priority threshold are counted as SLA breaches. Unresolved tickets are reported separately.
 
+## Assumptions
+
+- Input is the synthetic CSV at `data/tickets.csv` with the current column names.
+- Invalid customer ratings are optional: they are stored as `None` instead of rejecting the row.
+- Duplicate ticket IDs: the first occurrence is kept; later copies are rejected.
+- SLA applies only to tickets that have a resolution time (Resolved/Closed after cleaning).
+- Unresolved tickets are counted separately and are not treated as SLA breaches.
+
+## Limitations
+
+- Input and output paths are hardcoded in `src/main.py`.
+- SLA hours are hardcoded in `src/services/ticket_analytics.py`.
+- No logging library, CLI, or extra export formats.
+- In this dataset, Medium and Low have no resolved tickets after cleaning, so their breach % is 0.
+- Allowed category/priority/status values are duplicated in the model and the validator.
+
 ## Test Results
 
 The project currently includes **17 unit and integration tests**, all passing successfully.
